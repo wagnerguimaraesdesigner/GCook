@@ -1,2 +1,2 @@
 # GCook
-Aplicação Web.Net MVC, padrão code-first, com MySql, para cadastro de exibição de receitas culinárias.
+Aplicação Web .Net MVC, padrão code-first, com MySql, para cadastro e exibição de receitas culinárias.

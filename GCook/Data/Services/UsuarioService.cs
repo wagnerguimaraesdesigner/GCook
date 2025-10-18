@@ -1,0 +1,47 @@
+using GCook.ViewModels;
+using GCook.Data;
+using Microsoft.AspNetCore.Identity;
+using GCook.Models;
+using GCook.Helpers;
+
+
+namespace GCook.Data.Services;
+
+public class UsuarioService : IUsuarioService
+{
+    private readonly AppDbContext _context;
+    private readonly SignInManager<Usuario> _signInManager;
+    private readonly UserManager<Usuario> _userManager;
+
+    public UsuarioService(
+        AppDbContext context,
+        SignInManager<Usuario> signInManager,
+        UserManager<Usuario> userManager
+    )
+    {
+        _context = context ;
+        _signInManager = signInManager;
+        _userManager = userManager;
+    }
+
+    public async Task<SignInResult> LoginUsuario(LoginVM login)
+    {
+        string userName = login.Email;
+        if (Helper.IsValidEmail(login.Email))
+        {
+            var user = await _userManager.FindByEmailAsync(login.Email);
+            if (user != null)
+                userName = user.UserName;
+        }
+    
+        var result = await _signInManager.PasswordSignInAsync(userName, login.Senha, login.Lembrar, lockoutOnFailure: true);
+    
+    
+    }
+
+
+    public Task LogoutUsuario()
+    {
+        throw new NotImplementedException();
+    }
+}

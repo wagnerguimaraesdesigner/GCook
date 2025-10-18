@@ -1,22 +1,21 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+
 namespace GCook.Models;
 
-[Table("categoria")]
+[Table("Categoria")]
+public class Categoria
+{
+    [Key]
+    public int Id { get; set; }
 
-    public class Categoria
-    {
-       [Key]
-       public int Id { get; set; }
-       [StringLength(30)]
-       [Required(ErrorMessage ="O nome é obrigatório")] 
+    [StringLength(30)]
+    [Required(ErrorMessage = "O Nome é Obrigatório")]
+    public string Nome { get; set; }
 
-       public string Nome { get; set; }
+    [StringLength(300)]
+    public string Foto { get; set; }
 
-       [StringLength(300)]
-       public String Foto { get; set; }
-
-        [Display(Name = "Exibir na Home?")]
-       public bool ExibirHome { get; set; } = false;
-
-    }
+    [Display(Name = "Exibir na Home?")]
+    public bool ExibirHome { get; set; } = false;
+}
